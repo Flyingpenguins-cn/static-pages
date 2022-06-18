@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页</title>
+<link href="网站.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+a:link {
+	text-decoration: none;
+	color: #001E43;
+}
+a:visited {
+	text-decoration: none;
+	color: #001E43;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+</style>
+<script type="text/JavaScript">
+function tankuang(msg) {
+  alert(msg);
+}
+</script>
+</head>
+
+<body>
+	<div class="main">
+   		<div class="logo"><img src="image/未标题-2.png" width="142" height="71" alt=""/></div>
+	  <div class="daohang"><table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" background="image/nav-x.gif" style="background-position: 10% 10%; background-">
+  <tbody>
+    <tr>
+      <td width="44" height="35">&nbsp;</td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td style="background-position: bottom center;" width="91"><strong><a href="index.html">首页</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><strong><a href="ASCII简介.html">ASCII</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><strong><a href="ASCII标准表.html">ASCII标准表</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><strong><a href="新闻速递.html">新闻速递</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><strong><a href="娱乐中心.html">娱乐中心</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><strong><a style="color:#437FC9" href="论坛.html">论坛</a></strong></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="91"><a href="关于我们.html"><strong>关于我们</strong></a></td>
+      <td width="2"><img src="image/line.gif" width="2" height="30" alt=""/></td>
+      <td width="121">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div><!--div daohang -->
+    <div class="box">
+     <div class="banner">
+   	<img src="image/ae488df1dbc64e5c9611182e3fd09ed3.jpeg" width="1000" height="300" alt=""/>
+   </div>
+      <div  class="side">
+        <h1>&nbsp; 登入/注册</h1>
+      	<p><br> &nbsp;	账号 
+      	  <input type="text"><br><br>&nbsp; 密码 
+      	    <input type="text"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" id="button1" value="提交"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	    
+      	    <a href="#"><input onClick="tankuang('抱歉，本站暂时不支持注册')" type="button" name="button" id="button2" value="注册"></a>
+      	</p>
+      </div>
+      <div class="contect">
+      	<h1>&nbsp;论坛</h1>
+      	<p style="color:darkblue;font-size: 10px;"><a href="index.html">ASCII</a>&nbsp; &gt; <a href="论坛.html">论坛中心</a> &gt;<a href="#"> I/O中断原理</a>&nbsp; &nbsp;&nbsp;<a href="论坛.html">返回</a></p>
+      	<h3 style="text-align: left;">&nbsp;I/O中断原理</h3>
+      	<p>本文来源：博客园<br>
+   	    本文作者：杰哥很忙<br>本文出处：<a href="https://www.cnblogs.com/Jack-Blog/p/12038716.html">https://www.cnblogs.com/Jack-Blog/p/12038716.html</a></p>
+      	<p>说明：本站只做搬运，仅供学习和参考。</p>
+      	<hr>
+      	<img style="margin: 5px 10px;" src="image/blogsimage/IO中断原理.jpg" alt="" width="230" height="160" align="right"/>
+      	<p>目录</p>
+      	
+		<ul style="text-align: left;font-size: 12px;">
+   	    <li><a href="#前言">前言</a></li>
+      	  <li><a href="#什么是中断">什么是中断</a></li>
+      	  <li><a href="#中断类型">中断类型</a>
+      	    <ul>
+      	      <li><a href="#硬件中断">硬件中断</a></li>
+      	      <li><a href="#软件中断">软件中断</a></li>
+   	        </ul>
+   	      </li>
+      	  <li><a href="#I/O中断流程">I/O中断流程</a>
+      	    <ul>
+      	      <li><a href="#无中断">无中断</a></li>
+      	      <li><a href="#有中断">有中断</a></li>
+   	        </ul>
+   	      </li>
+      	  <li><a href="#中断处理">中断处理</a></li>
+      	  <li><a href="#相关文献">相关文献</a></li>
+   	    </ul>
+      	<hr>
+      	<h4 id="前言" style="text-align: left;">&nbsp;前言</h4>
+      	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Windows内核原理-同步IO与异步IO和《高性能网络通讯原理》两篇文章中，都出现了中断这两个字。本篇文章会对中断操作的原理进行说明。</p><br>
+      	<h4 id="什么是中断" style="text-align: left;">&nbsp;什么是中断</h4>
+      	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 中断指当出现需要时，CPU暂时停止当前程序的执行转而执行处理新情况的程序和执行过程。即在程序运行过程中，系统出现了一个必须由CPU立即处理的情况，此时，CPU暂时中止程序的执行转而处理这个新的情况的过程就叫做中断。<br>
+      	  <br>
+		我们知道CPU是按指令顺序进行执行的，操作系统每过大约15ms会发生一次线程调度(Windows下)，根据线程优先级先调度优先级高的线程。但是实际情况并没有那么简单，若我们接收到一个网络请求，如果要等当前线程执行完或15ms线程调度之后才去处理网络请求，网卡缓冲区很有可能会被占满，此时就发生了丢包。</p>
+     	<h4 id="中断类型" style="text-align: left;">&nbsp;中断类型</h4>
+      	<p>中断分为硬件中断和软件中断。</p>
+   			<h5 id="硬件中断" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;	硬件中断</h5>
+   		<p>&nbsp;&nbsp;&nbsp;&nbsp;	硬件中断即为硬件发出的中断信号，如I/O中断和硬件失效中断。</p>
+      		<ul style="text-align: left;font-size: 12px;">
+      		  <li>I/O中断：由I/O控制器产生，用于发送信号通知操作完成等信号。</li>
+      		  <li>硬件失效中断：如掉电或存储器奇偶错之类的故障。</li>
+   	   		</ul>
+   		<h5 id="软件中断" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;	软件中断</h5>
+      	<p>&nbsp;&nbsp;&nbsp;&nbsp;	软件中断即为非硬件发出的中断信号，如程序中断和时钟中断。</p>
+      	<ul style="text-align: left;font-size: 12px;">
+      	  <li>程序中断：一些指令产生的异常(如算数移除、除数为0等)。</li>
+      	  <li>
+      	    时钟中断：由处理器内部的计时器产生，允许操作系统以一定规程执行函数。
+   	      </li>
+   	    </ul>
+   	    <p><strong><em>我们提到了操作系统每过大约15ms会进行一次线程调度，就是利用时钟中断来实现的。</em></strong></p>
+   	    <hr>
+   	    
+   	    <h4 id="I/O中断流程" style="text-align: left;">&nbsp; I/O中断流程</h4>
+   	    <p>本篇文章还是主要解释前几篇文章提到的I/O中断进行解释说明，因此仅以I/O中断举例，但是中断的原理和流程都是相似的。<br>
+   	      <br>
+
+		I/O中断通过中断处理器执行中断操作。当外部设备的I/O模块准备好时，它会发送给CPU一个中断信号，CPU则会“立即”做出响应，暂停当前程序的处理去服务该I/O设备的程序。</p>
+   	    <p><strong><em>也可能不是立即，比如同时存在多个中断，则根据实际的中断算法决定，是按中断先后顺序执行中断操作，还是按中断优先级执行。
+		I/O中断时硬件中断，需要硬件支持来接收中断信号。</em></strong></p>
+   	    <h5 id="无中断" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;	无中断</h5>
+   	    <p>&nbsp;&nbsp;&nbsp;&nbsp;	为了更好的说明中断带来的性能提升，我们先描述一下没有中断时程序如何处理I/O操作。</p>
+   	    <img style="margin-top: 5px" src="image/blogsimage/无中断.png" width="700" height="288" alt=""/>
+   	    <ul style="text-align: left;font-size: 12px;">
+   	      <li>当我们程序需要从硬盘读取一个文件时，会先检查内核缓存中是否有数据，若没有数据，则执行实际I/O操作。在I/O操作执行时，我们的用户线程将阻塞等待数据从硬盘写到内存中。对于用户来说线程是被阻塞的。</li>
+   	      <li>在实际的I/O操作过程中，若没有中断操作，CPU会不断轮询检查I/O操作是否完成，若I/O操作没有完成则继续调度其他线程，过一会儿再来检查。若操作完成，CPU将线程加入到线程就绪队列中并恢复线程上下文信息。</li>
+   	      <li>线程处于就绪队列，可以被操作系统调度从而继续执行读操作，此时会将数据从操作系统内核缓存读取到用户缓存中。</li>
+        </ul>
+   	    <h5 id="有中断" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;	有中断</h5>
+   	    <img src="image/blogsimage/有中断.png" width="700" height="291" alt=""/>
+		<ul style="text-align: left;font-size: 12px;">
+		  <li>当我们程序需要从硬盘读取一个文件时，会先检查内核缓存中是否有数据，若没有数据，则执行实际I/O操作。在I/O操作执行时，我们的用户线程将阻塞等待数据从硬盘写到内存中。对于用户来说线程是被阻塞的。</li>
+		  <li>在实际的I/O操作过程中，CPU向I/O模块(DMA控制器)发送读指令，然后就去调度其他线程。</li>
+		  <li>当I/O模块(DMA控制器)I/O执行完成后，会产生中断信号在通知CPU，CPU将线程加入到线程就绪队列中并恢复线程上下文信息。</li>
+		  <li>线程处于就绪队列，可以被操作系统调度从而继续执行读操作，此时会将数据从操作系统内核缓存读取到用户缓存中。</li>
+	    </ul>
+		<p>由此可知，有中断还是没有中断对于用户来说线程都是阻塞的，对于操作系统内核来说通过中断方式主动通知CPU的方式减少了线程轮询判断，提高了线程执行效率。<br>
+		当然，为了进一步提高线程利用率，此时我们可以通过异步操作API执行I/O操作。
+		比如.Net4.5的async和await关键字，当调用异步操作后，API内部保存了相关状态机信息(回调信息)，线程继续执行其他操作，当操作系统内核读取数据完成时，线程调用回调方法恢复到await的后续操作。整个过程中线程不会因为阻塞带来导致性能损失。</p>
+   	    <hr>
+   	    <h4 id="中断处理" style="text-align: left;">&nbsp; 中断处理</h4>
+   	    <P>当I/O设备完成一次I/O操作时，发生以下事件：</P>
+   	    <ul style="text-align: left;font-size: 12px;">
+   	      <li>开始I/O操作前，处理器将当前处理的相关信息如指令地址、必要的状态信息等保存到栈中，使得中断后可以恢复执行。</li>
+   	      <li>I/O操作完成后，设备给处理器发送一个中断信号。</li>
+   	      <li>处理器响应中断信号。</li>
+   	      <li>处理器对中断信号进行判断，若存在未响应的中断，则给产生中断信号的设备发送确认信号，确认信号使得设备取消它的中断信号。</li>
+   	      <li>处理器将控制前转移给中断程序中，中断程序从栈中获取之前保存的信息，使得能继续执行I/O完成时的后续操作。</li>
+   	      <li>处理器将中断程序入口地址载入到程序计数器中，使得处理器能继续执行下一个指令周期。</li>
+        </ul>
+   	    <h4 id="相关文献" style="text-align: left;">&nbsp; 相关文献</h4>
+   	    <ol style="text-align: left;font-size: 12px;">
+   	      <li>《操作系统-精髓与设计原理》</li>
+   	      <li><a href="https://blog.csdn.net/flydream0/article/details/8589667">时钟中断是rt-thread的线程调度器的驱动力</a></li>
+        </ol>
+		
+ 	    <p><img style="margin-top: 5px;margin-right: 5px;margin-bottom: 5px;margin-left: 5px;
+ 	    " src="image/blogsimage/杰哥很忙.png" alt="" width="180" height="180"/></p>
+  	    <p>每天收获一点点</p>
+   	    
+   	    
+   	    
+   	    
+   	    
+   	    
+	    <p>微信扫一扫二维码关注订阅号杰哥技术分享<br>
+		    出处：<a href="https://www.cnblogs.com/Jack-Blog/p/12038716.html">https://www.cnblogs.com/Jack-Blog/p/12038716.html</a><br>
+		    作者：杰哥很忙<br>
+		    本文使用「CC BY 4.0」创作共享协议。欢迎转载，请在明显位置给出出处及链接。
+   	    <p style="text-align: right;"><a href="#">回到顶部</a></p>
+   	    </p>
+   	    <hr>
+   	    <h4 style="text-align: left;">&nbsp;&nbsp; 评论</h4>
+   	    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 共有21条评论</p>
+   	    <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="font-size: 12px;">
+   	      <tbody>
+   	        <tr>
+   	          <td height="225" valign="middle"><table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+   	            <tbody>
+   	              <tr>
+   	                <td width="3%" height="78" valign="top"><span style="background-color: white;"><img src="image/blogsimage/hp_lake.png" alt="" width="30" height="30" align="left"/></span></td>
+   	                <td width="97%" valign="top"><p style="background-color: white;margin-top: 6px;">秋天的枫：<br><br> 
+   	               &nbsp;&nbsp;&nbsp; 很棒哦~前途可期啊~</p>
+   	                <hr style=";color:#F8F8F8;">
+                    </td>
+                  </tr>
+   	              <tr>
+   	                <td height="51" valign="top"><img src="image/blogsimage/Turtle_Zhang.png" width="30" height="30" alt=""/></td>
+   	                <td valign="top"><p style="text-align: left;background-color: white;margin-top: 6px;">落单的毛毛虫：<br><br> 
+   	               &nbsp;&nbsp;&nbsp; 看懂了，有点意思~ 不错。</p>
+   	                <hr>
+   	                </td>
+                  </tr>
+   	              <tr>
+   	                <td height="49" align="left" valign="top"><img src="image/blogsimage/知了一笑.png" alt="" width="31" height="30"/></td>
+   	                <td><p style="background-color: white;margin-top: 6px;">知了一笑：<br><br>
+   	               &nbsp;&nbsp;&nbsp; 推荐去杰哥的公众号查看更多内容。</p>
+                    </td>
+                  </tr>
+                </tbody>
+ 	            </table>   	            <p style="background-color: white;">&nbsp;</p>
+   	          
+   	          
+   	          </td>
+            </tr>
+          </tbody>
+        </table>
+        <table width="90%" height="53" border="0" align="center" bgcolor="#FFFFFF"dth="200">
+  <tbody>
+    <tr>
+      <td align="left" valign="top"><p style="background-color: white;margin-top: 6px;">我来说一句<br><br>
+        <textarea style="width: 500px;" name="textarea" id="textarea"></textarea><br><br><input type="button" value="提交">
+      </p>    </tr>
+  </tbody>
+</table>
+
+   	    <p><a href="https://baike.sogou.com/v53369.htm?fromTitle=ASCII"><br>
+   	      搜狗百科：<em>https://baike.sogou.com/v53369.htm?fromTitle=ASCII</em></a><br>
+      	  <a href="https://baike.baidu.com/item/ASCII/309296?fr=aladdin">百度百科：<em>https://baike.baidu.com/item/ASCII/309296?fr=aladdin</em></a><br>
+      	  <a href="https://zh.wikipedia.org/wiki/ASCII">维基百科：<em>https://zh.wikipedia.org/wiki/ASCII</em></a><br>
+   	    &nbsp;</p>
+      </div>
+      
+      
+      <div class="side">
+      	<h1>&nbsp;日历</h1>
+      	<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#E2F3FF" style="color: #001E43;">
+  			<tbody>
+			    <tr>
+ 			     <td width="15%" align="center">&lt;</td>
+ 			     <td width="71%" align="center">2019年12月</td>
+ 			     <td width="15%" align="center">&gt;</td>
+ 			   </tr>
+ 			 </tbody>
+		</table>
+      	
+      	<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#E2F3FF" style="color: #9F9F9F;">
+  <tbody>
+    <tr>
+      <td align="center"><strong>日</strong></td>
+      <td align="center"><strong>一</strong></td>
+      <td align="center"><strong>二</strong></td>
+      <td align="center"><strong>三</strong></td>
+      <td align="center"><strong>四</strong></td>
+      <td align="center"><strong>五</strong></td>
+      <td align="center"><strong>六</strong></td>
+    </tr>
+    <tr>
+      <td align="center"><u>1</u></td>
+      <td align="center"><u>2</u></td>
+      <td align="center"><u>3</u></td>
+      <td align="center"><u><a style="color:#25E400;" href="#">4</a></u></td>
+      <td align="center"><u>5</u></td>
+      <td align="center"><u>6</u></td>
+      <td align="center"><u>7</u></td>
+    </tr>
+    <tr>
+      <td align="center"><u>8</u></td>
+      <td align="center"><u>9</u></td>
+      <td align="center"><u>10</u></td>
+      <td align="center"><u>11</u></td>
+      <td align="center"><u>12</u></td>
+      <td align="center"><u>13</u></td>
+      <td align="center"><u>14</u></td>
+    </tr>
+    <tr>
+      <td align="center"><u>15</u></td>
+      <td align="center"><u>16</u></td>
+      <td align="center"><u>17</u></td>
+      <td align="center"><u>18</u></td>
+      <td align="center"><u><a style="color: red;" href="#">19</a></u></td>
+      <td align="center"><u>20</u></td>
+      <td align="center"><u>21</u></td>
+    </tr>
+    <tr>
+      <td align="center"><u>22</u></td>
+      <td align="center"><u>23</u></td>
+      <td align="center"><u>24</u></td>
+      <td align="center"><u>25</u></td>
+      <td align="center"><u>26</u></td>
+      <td align="center"><u>27</u></td>
+      <td align="center"><u>28</u></td>
+    </tr>
+    <tr>
+      <td align="center"><u>29</u></td>
+      <td align="center"><u>30</u></td>
+      <td align="center"><u><a href="#">31</a></u></td>
+      <td align="center"><u>1</u></td>
+      <td align="center"><u>2</u></td>
+      <td align="center"><u>3</u></td>
+      <td align="center"><u>4</u></td>
+    </tr>
+    <tr>
+      <td align="center"><u>5</u></td>
+      <td align="center"><u>6</u></td>
+      <td align="center"><u>7</u></td>
+      <td align="center"><u>8</u></td>
+      <td align="center"><u>9</u></td>
+      <td align="center"><u>10</u></td>
+      <td align="center"><u>11</u></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+      
+      
+       <div class="side">
+      	<h1>&nbsp;随笔分类</h1>
+      	<p><a href="#" onClick="tankuang('暂无内容');">&nbsp; .NET技术(36)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;编程语言(17)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;软件设计(32)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;Web前端(96)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;企业信息化(0)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;软件设计(201)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;数据库技术(69)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;手机开发(154)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;操作系统(26)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;所有随笔(699)</a><br>
+      	<a href="#" onClick="tankuang('暂无内容');">&nbsp;所有评论(1757)</a><br>
+      	<br></p>
+      </div>
+      
+     
+      
+      <div class="side">
+      	<h1>&nbsp;新闻速递</h1>
+      	<p>&nbsp; <a href="新闻速递子页1.html">2008北京申奥成功,神州大地欢呼雀跃！</a><br>
+     	  <a href="新闻速递.html">&nbsp; python赶超java成为全球使用量第一？</a><br>
+      	  &nbsp; <a href="http://dy.163.com/v2/article/detail/EFGB6TG405367EVF.html">阿里巴巴董事长卸任教书</a><br>
+      	  &nbsp; <a href="#">程序员头秃的原因是什么？</a><br>
+      	   &nbsp;<a href="#"> 林志玲更名为黑泽志玲？？？</a><br>
+      &nbsp;	<a href="404.html">震惊！苍老师竟成宝妈？</a><br><br><br></p>
+      </div>
+	  <div class="side">
+			<h1>&nbsp;友情推荐</h1>
+			<p><a href="https://www.w3school.com.cn/index.html">&nbsp; W3Csclool</a><br>
+		    <a href="https://blog.csdn.net/">&nbsp; CSDN学院</a><br>
+		    <a href="https://www.cnblogs.com/">&nbsp; 博客园</a><br>
+		    <a href="https://search.bilibili.com/all?keyword=大学公开课&from_source=nav_search_new">&nbsp; bilibili大学版</a><br>
+		    <a href="https://github.com/">&nbsp; GitHub</a><br>
+		    <a href="https://www.cnblogs.com/flyingpenguins/">&nbsp; 我的个人博客</a></p>
+	  </div>
+	  <div id="footdiv"><br><br><p><a href="index.html">首页</a> | <a href="#">收藏本站</a> | <a href="#">设为首页</a> | <a href="ASCII标准表.html">ASCII标准表</a> | <a href="https://baike.sogou.com/v53369.htm?fromTitle=ASCII">搜狗百科</a> | <a href="关于我们.html">关于我们</a> | <a href="https://www.cnblogs.com/flyingpenguins/">我的博客</a><br>
+	  ©copyright by xiaozixing 2019-12-04~2019-12-??</p></div>
+		<div style="clear: both"></div>
+    </div><!--div box -->
+   </div><!--div main -->
+</body>
+</html>
